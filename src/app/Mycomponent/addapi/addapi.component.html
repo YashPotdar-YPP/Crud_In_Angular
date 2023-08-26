@@ -1,0 +1,135 @@
+<nav class="navbar navbar-light bg-primary">
+  <div class="container-fluid">
+    <h2 style="color: white">Crud</h2>
+    <div class="d-flex">
+      <button
+        type="button"
+        class="btn btn-success me-4"
+        data-bs-toggle="modal"
+        data-bs-target="#exampleModal"
+        (click)="clickAddUser()"
+      >
+        Add User
+      </button>
+    </div>
+  </div>
+</nav>
+
+<table class="table container mt-4">
+  <thead>
+    <tr>
+      <th>Firstname</th>
+      <th>Lastname</th>
+      <th>Phone no.</th>
+      <th>Action</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr *ngFor="let rows of userData">
+      <td>{{ rows.firstName }}</td>
+      <td>{{ rows.lastName }}</td>
+      <td>{{ rows.phoneNumber }}</td>
+      <td>
+        <button
+          (click)="onEdit(rows)"
+          data-bs-toggle="modal"
+          data-bs-target="#exampleModal"
+          class="btn btn-primary me-4"
+        >
+          Edit
+        </button>
+        <button (click)="deleteUserDetails(rows)" class="btn btn-danger">
+          Delete
+        </button>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div
+  class="modal fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  aria-hidden="true"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="exampleModalLabel">User Details</h1>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="formValue">
+          <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Firstname</label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              formControlName="firstName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Lastname</label
+            >
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="lastName"
+            />
+          </div>
+          <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label"
+              >Phone no.</label
+            >
+            <input
+              type="number"
+              class="form-control"
+              id="exampleInputPassword1"
+              formControlName="phoneNumber"
+            />
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          id="Close"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          class="btn btn-primary"
+          (click)="postUserDetails()"
+          *ngIf="showAddBtn"
+        >
+          Add
+        </button>
+        <button
+        type="button"
+        class="btn btn-primary"
+        (click)="editUserDetails()"
+        *ngIf="showEditBtn"
+      >
+      Update
+      </button>
+      </div>
+    </div>
+  </div>
+</div>
